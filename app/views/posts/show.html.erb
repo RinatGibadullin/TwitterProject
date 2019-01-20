@@ -1,19 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="card border-info mb-3">
 
-<p>
-  <strong>Desc:</strong>
-  <%= @post.desc %>
-</p>
+    
+	<div class="card-header">
+	    <div class="row">
+		    <h2 class="col-md-10 text-center"><%= @post.title %></h2>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
+			<div class="col-md-1">
+				<button class="btn btn-outline-primary"><%= link_to 'изменить', edit_post_path(@post) %></button>
+			</div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+			<div class="col-md-1">
+				<button class="btn btn-danger"><%= link_to 'удалить', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></button>
+			</div>
+		</div>
+    </div>
+    	
+
+    <div class="card-body">
+      <h5 class="card-subtitle mb-2 text-muted"><%= @post.desc %></h5>
+      <h3 class="card-text"><%= @post.body %></h3>
+      <button class="btn btn-outline-primary"><%= link_to 'К списку постов', posts_path %></button>
+    </div>
+
+    <div class="card-footer text-muted">
+      <%= @post.created_at %>
+    </div>
+
+ </div>
+
+

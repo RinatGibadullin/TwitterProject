@@ -2,7 +2,34 @@
 
 <h1>Posts</h1>
 
-<table>
+<% @posts.each do |post| %>
+
+  <div class="card border-info mb-3">
+
+    <div class="card-header">
+      <h2><%= post.title %></h2>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-subtitle mb-2 text-muted text-center"><%= post.desc %></h5>
+      <h3 class="card-text text-center"><%= post.body %></h3>
+
+      <div class="text-right">
+        <button class="btn btn-outline-primary"><%= link_to 'Читать далее', post %></button>
+      </div>
+      
+    </div>
+
+    <div class="card-footer text-muted">
+      <%= post.created_at %>
+    </div>
+
+  </div>
+
+  <br>
+<% end %>
+
+<!-- <table>
   <thead>
     <tr>
       <th>Title</th>
@@ -24,7 +51,7 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
 <br>
 
