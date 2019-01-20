@@ -2,7 +2,6 @@
 
 <div class="card border-info mb-3">
 
-    
 	<div class="card-header">
 	    <div class="row">
 		    <h2 class="col-md-10 text-center"><%= @post.title %></h2>
@@ -17,7 +16,6 @@
 		</div>
     </div>
     	
-
     <div class="card-body">
       <h5 class="card-subtitle mb-2 text-muted"><%= @post.desc %></h5>
       <h3 class="card-text"><%= @post.body %></h3>
@@ -27,7 +25,39 @@
     <div class="card-footer text-muted">
       <%= @post.created_at %>
     </div>
+</div>
 
- </div>
+<hr>
+
+<div>
+	<h1>Комментарии</h1>
+	<% @post.comments.each do |comment| %>
+	  	<div class="alert alert-light row">
+	  		<h5 class="col-md-10 text-left"><%= comment.body %></h5> 
+	  		<p class="col-md-2"> <%= comment.created_at %> </p>
+	  	</div>
+	<% end %>		
+</div>
+
+<hr>
+
+<div>
+	<h3>Добавить комментарий</h3>
+
+	<%= form_for([@post, @post.comments.build]) do |form| %>
+	  <div class="form-group">
+	    <label>Текст</label>
+	    <div>
+	      <%= form.text_area(:body, {:class => 'form-control'})%>
+	    </div>
+
+	    <br>
+
+	    <div>
+	      <%= form.submit("Добавить",{:class => 'btn btn-primary btn-lg'})%>
+	    </div>
+	  </div>
+	<% end %>
+</div>
 
 
