@@ -7,7 +7,8 @@
   <div class="card border-info mb-3">
 
     <div class="card-header">
-      <h2><%= post.title %></h2>
+      <h3><%= post.user.email %></h3>
+      <h2 class="text-center"><%= post.title %></h2>
     </div>
 
     <div class="card-body">
@@ -15,7 +16,7 @@
       <h3 class="card-text text-center"><%= post.body %></h3>
 
       <div class="text-right">
-        <button class="btn btn-outline-primary"><%= link_to 'Читать далее', post %></button>
+        <p><%= link_to 'Читать далее', post, class: "btn btn-outline-primary" %></p>
       </div>
       
     </div>

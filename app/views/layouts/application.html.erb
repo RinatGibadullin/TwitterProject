@@ -14,16 +14,17 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <h5 class="my-0 mr-md-auto font-weight-normal">Twitter</h5>
       <nav class="my-2 my-md-0 mr-md-3">
-        <span class="p-2 text-dark"><%= link_to 'На главную',home_path %></span>
+        <p><%= link_to 'На главную',home_path, class: "p-2 text-dark" %></p>
       </nav>
       
       <% if user_signed_in? %>
-        <button class="btn btn-outline-primary"><%= link_to 'Новый пост', new_post_path %></button>
-        <button class="btn btn-outline-primary"><%= link_to 'Выйти', destroy_user_session_path %></button>
+        <p><%= link_to current_user.email, home_path, class: "btn btn-outline-warning" %></p>
+        <p><%= link_to 'Новый пост', new_post_path, class: "btn btn-outline-primary" %></p>
+        <p><%= link_to 'Выйти', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary" %></p>
 
       <% else %>
-        <button class="btn btn-outline-primary"><%= link_to 'Зарегистрироваться', new_user_registration_path %></button>
-        <button class="btn btn-outline-primary"><%= link_to 'Войти', new_user_session_path %></button>
+        <p><%= link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-outline-primary" %></p>
+        <p><%= link_to 'Войти', new_user_session_path, class: "btn btn-outline-primary" %></p>
       <% end %>
     </div>
 

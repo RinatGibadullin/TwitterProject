@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
+		@user = current_user
 	end
 
 	def show
@@ -10,11 +11,16 @@ class PostsController < ApplicationController
 	end
 
 	def new
-		@post = Post.new
+		# @post = Post.new
+		@post = current_user.posts.build
 	end
 
 	def create
-		@post = Post.new(post_params)
+		# @post = Post.new(post_params)
+		# @post.user_id = current_user.id
+
+		@user = current_user
+		@post = @user.posts.build(post_params)
 
 		if @post.save
 			redirect_to @post
