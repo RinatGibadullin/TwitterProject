@@ -32,7 +32,7 @@
 	<h1>Комментарии</h1>
 	<% @post.comments.each do |comment| %>
 	  	<span class="alert alert-light row">
-			<span class="col-md-1 alert alert-success border rounded"><%= comment.user_id %></span>
+			<span class="col-md-1 alert alert-success border rounded"><%= comment.user.username %></span>
 	  		<h5 class="col-md-8 text-left"><%= comment.body %></h5> 
 	  		<p class="col-md-2"> 
 	  			<%= comment.created_at.strftime('%F') %>
