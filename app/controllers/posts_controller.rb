@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
-	# before_action: authenticate_user!, only: [:index, :show]
+	before_action :authenticate_user!, except: [:index, :show] # нужен логин на всех кроме индекс и шоу
 
 	def index
-		@posts = Post.all
 		@user = current_user
+		@posts = Post.all.order("created_at DESC") # для вывода всех постов
+		# @posts = @user.posts.order("created_at DESC") # для вывода моих постов
 	end
 
 	def show
 		@post = Post.find(params[:id])
+		
 	end
 
 	def new
@@ -35,7 +37,24 @@ class PostsController < ApplicationController
 		redirect_to posts_path
 	end
 
-	private def post_params
+	def edit
+		@post = Post.find(params[:id])
+	end
+
+	def update
+		@post = Post.find(params[:id])
+
+		if @post.update_attributes(post_params)
+			redirect_to @post
+		else
+			render :edit
+		end
+	end
+
+
+
+	private 
+	def post_params
 		params.require(:post).permit(:title,:desc,:body)
 	end
 

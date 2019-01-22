@@ -6,9 +6,12 @@
 
 	<div class="card-header">
 	    <div class="row">
+	    	<span class="alert alert-success border rounded"><%= @post.user.username %></span>
 		    <h2 class="col-md-9 text-center"><%= @post.title %></h2>
-			<p class="col-md-1"><%= link_to 'изменить', edit_post_path(@post), class: "btn btn-outline-primary" %></p>
-			<p class="col-md-1"><%= link_to 'удалить', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></p>
+		    <% if signed_in? && (current_user.id == @post.user_id) %>
+				<p class="col-md-1"><%= link_to 'изменить', edit_post_path(@post), class: "btn btn-outline-primary" %></p>
+				<p class="col-md-1"><%= link_to 'удалить', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></p>
+			<% end %>
 		</div>
     </div>
     	
@@ -18,7 +21,8 @@
     </div>
 
     <div class="card-footer text-muted">
-      <%= @post.created_at %>
+      <%= @post.created_at.strftime('%F') %>
+      <%= @post.created_at.strftime('%H:%M') %>
     </div>
 </div>
 
@@ -27,11 +31,17 @@
 <div>
 	<h1>Комментарии</h1>
 	<% @post.comments.each do |comment| %>
-	  	<div class="alert alert-light row">
+	  	<span class="alert alert-light row">
+			<span class="col-md-1 alert alert-success border rounded"><%= comment.user_id %></span>
 	  		<h5 class="col-md-8 text-left"><%= comment.body %></h5> 
-	  		<p class="col-md-3"> <%= comment.created_at %> </p>
-	  		<p class="col-md-1"><%= link_to 'удалить', post_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></p>
-	  	</div>
+	  		<p class="col-md-2"> 
+	  			<%= comment.created_at.strftime('%F') %>
+      			<%= comment.created_at.strftime('%H:%M') %> 
+  			</p>
+	  		<% if signed_in? && (current_user.id == comment.user_id) %>
+	  			<p class="col-md-1"><%= link_to 'удалить', post_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></p>
+	  		<% end %>
+	  	</span>
 	<% end %>		
 </div>
 
